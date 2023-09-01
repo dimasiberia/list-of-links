@@ -1,3 +1,16 @@
 button{
     display: block;
 }
+textarea{
+    width: 80%;
+    margin-left: 20px;
+}
+textarea.list{
+    width: 15%;
+
+}
+.buttons{
+    margin: 0 40px;
+    display: flex;
+    justify-content: space-between;
+}

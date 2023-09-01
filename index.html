@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <script src="index.js" ></script>
-  <textarea name="text" id="text" cols="200" rows="50"></textarea>
-  <button onclick="takeLinks()">Создать список</button>
+  <script src="index.js"></script>
+  <textarea name="text" id="text" rows="70">Вставьте текст статьи в это окно</textarea>
+  <textarea class="list" id="list" rows="70">Сортированный список сслылок будет здесь</textarea>
+  <div class="buttons">
+    <button onclick="takeLinks()">Создать список</button>
+    <button class="sort" onclick="sort()">Сортировать список</button>
+  </div>
+
 </body>
+
 </html>
