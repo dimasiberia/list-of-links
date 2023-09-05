@@ -8,15 +8,18 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
+<script src="index.js" ></script>
 <body>
-  <script src="index.js"></script>
-  <textarea name="text" id="text" rows="70">Вставьте текст статьи в это окно</textarea>
-  <textarea class="list" id="list" rows="70">Сортированный список сслылок будет здесь</textarea>
+  <textarea name="text" id="text" rows="50">Вставьте текст статьи в это окно</textarea>
+  <textarea class="list" id="list" rows="50">Сортированный список сслылок будет здесь</textarea>
   <div class="buttons">
     <button onclick="takeLinks()">Создать список</button>
     <button class="sort" onclick="sort()">Сортировать список</button>
   </div>
-
+  <textarea id="reference"
+  rows="20">Вставьте список литературы разделенных между собой переносом строки (\n) для парсинга данных в local storage браузера, создается пара (ключ:значение), ключ генерируется из числа авторов, например Гражданкин, 2004. Значение - DOI, если DOI нет, значение = строке списка литературы</textarea>
+  <button class="parsing" onclick="parsingDOI()">Парсинг данных</button>
+  <button onclick="makingListOfReferences()">сделать список</button>
 </body>
 
 </html>

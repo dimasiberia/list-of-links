@@ -1,6 +1,6 @@
 function takeLinks() {
     let text = document.getElementById('text').value
-    let links = text.match(/\[.{0,300}?[19||20||21||22]\d\d\]/g);
+    let links = text.match(/\[.{1,300}?[19||20]\d\d\]/g);
     links = links.join('\n')
     links = links.replaceAll(/[\[||\]]/g, '').replaceAll(';', '\n').split('\n')
     for (let i = 0; i < links.length; i++) {
@@ -42,3 +42,87 @@ function sort() {
     let uniqListStr = arrUniq.join('\n')
     list.value = uniqListStr;
 }
+function parsingDOI() {
+    let text = document.getElementById('reference').value
+    console.log(text)
+    let arr = text.split('\n');
+    for (i of arr) {
+        if (i.length > 50) {
+            let autors = i.slice(0, 50)
+            let count = autors.match(/\.,/g)
+            let surName = i.match(/[A-Z||А-Я][a-z||а-я||’||'][a-z||а-я||’||']*/g)
+            // let doi = i.match(/10\.1.*\d/)
+            let doi = i
+            let year = i.match(/[1||2]\d\d\d/)
+            if (count == null) {
+                let key = surName[0] + ', ' + year;
+                //присваивание ссылки если нет дои
+                // if (doi == null) {
+                //     doi = i
+                // }
+                localStorage.setItem(key, doi)
+                continue;
+            }
+            if (count.length == 1) {
+                let key = surName[0] + ', ' + surName[1] + ', ' + year;
+                if (doi == null) {
+                    doi = i
+                }
+                localStorage.setItem(key, doi)
+            }
+            if (count.length >= 2) {
+                let key = '';
+                if (surName[0].match(/[а-я]/g) == null) {
+                    key = surName[0] + ' et al., ' + year;
+                }
+                else {
+                    key = surName[0] + ' и др., ' + year;
+                }
+                if (doi == null) {
+                    doi = i
+                }
+                localStorage.setItem(key, doi)
+            }
+        }
+    }
+
+}
+
+function makingListOfReferences() {
+    let text = document.getElementById('list').value
+    let arr = text.split('\n')
+    let listDOI = ''
+    for (let i = 0; i < arr.length; i++) {
+        if (localStorage.getItem(arr[i]) != null) {
+            arr[i] = localStorage.getItem(arr[i])
+            if (arr[i].indexOf('10.1') != -1) {
+                listDOI += arr[i] + '\n'
+            }
+        }
+        let list = arr.join('\n\n')
+        document.getElementById('reference').value = list
+    }
+}
+
+// async function makeCSLfrom() {
+//     let text = document.getElementById('reference').value
+//     let arr = text.split('\n')
+//     for(i of arr){
+
+//         try {
+//             await fetch(`https://cdn.jsdelivr.net/npm/citation-js`);
+//             let Cite = require('citation-js')
+//             let example = await new Cite(i)
+    
+//             let output = example.format('bibliography', {
+//                 format: 'text',
+//                 template: 'apa',
+//                 lang: 'en-US'
+//             })
+//             console.log(output)
+//         } catch(e){
+//             console.log(i+'\n')
+//         }
+//     }
+// }
+

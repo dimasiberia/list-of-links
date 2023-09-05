@@ -4,13 +4,19 @@ button{
 textarea{
     width: 80%;
     margin-left: 20px;
+    font-size: 20px;
 }
 textarea.list{
     width: 15%;
 
-}
+} 
+
 .buttons{
-    margin: 0 40px;
+    margin:  20px;
     display: flex;
     justify-content: space-between;
+
+}
+div{
+    margin: 20px;
 }
