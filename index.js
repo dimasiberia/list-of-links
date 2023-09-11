@@ -1,8 +1,16 @@
 function takeLinks() {
+    let x = prompt('Введите разделитель цитирования в тексте?','[]');
+    let y = `\\${x[0]}`
+    let z = `\\${x[1]}`
     let text = document.getElementById('text').value
-    let links = text.match(/\[.{1,300}?[19||20]\d\d\]/g);
-    links = links.join('\n')
-    links = links.replaceAll(/[\[||\]]/g, '').replaceAll(';', '\n').split('\n')
+    const regex1 = RegExp(`${y}.{1,300}?[19||20]\\d\\d${z}`,`g`)
+    // let links = text.match(/\[.{1,300}?[19||20]\d\d\]/g);
+    console.log(regex1)
+    let links = text.match(regex1);
+    console.log(links)
+    links = links.join('\n');
+    const regex2 = new RegExp(`[${y}||${z}]`,'g')
+    links = links.replaceAll(regex2, '').replaceAll(';', '\n').split('\n')
     for (let i = 0; i < links.length; i++) {
         links[i] = links[i].trim()
         if (links[i].search(/\d[a||b||c||а||б||в]?,\s\d/) != -1) {
